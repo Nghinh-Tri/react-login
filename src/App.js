@@ -1,25 +1,51 @@
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import HomePage from './screen/HomePage/HomePage';
+import LoginPage from './screen/LoginPage/LoginPage';
+import { history } from './service/helper/History';
+import { Route, Router } from 'react-router-dom';
+import { PrivateRoute } from './component/PrivateRouter';
+
+class App extends Component {
+
+    constructor(props) {
+        super(props);
+        const { dispatch } = this.props;
+        history.listen((location, action) => {
+            // clear alert on location change
+            // dispatch(alertActions.clear());
+        });
+    }
+
+    render() {
+        const { alert } = this.props;
+        return (
+            <div className="jumbotron">
+                <div className="container">
+                    <div className="col-sm-8 col-sm-offset-2">
+                        {alert.message &&
+                            <div className={`alert ${alert.type}`}>{alert.message}</div>
+                        }
+                        <Router history={history}>
+                            <div>
+                                <PrivateRoute exact path="/" component={HomePage} />
+                                <Route path="/login" component={LoginPage} />
+                            </div>
+                        </Router>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        alert: state.alertReducer
+    };
+}
+
+
+export default connect(mapStateToProps, null)(App);
