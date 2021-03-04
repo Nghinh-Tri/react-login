@@ -7,6 +7,8 @@ import LoginPage from './screen/LoginPage/LoginPage';
 import { history } from './service/helper/History';
 import { Route, Router } from 'react-router-dom';
 import { PrivateRoute } from './component/PrivateRouter';
+import Layout from './layout/Layout';
+import RouteList from './RouterMap'
 
 class App extends Component {
 
@@ -17,6 +19,18 @@ class App extends Component {
             // clear alert on location change
             // dispatch(alertActions.clear());
         });
+    }
+
+    showPrivateRoute = (RouteList) => {
+        var result = null
+        if (RouteList.length > 0) {
+            result = RouteList.map((route, index) => {
+                return (
+                    <PrivateRoute key={index} exact path={route.path} component={Layout} />
+                )
+            });
+        }
+        return result
     }
 
     render() {
@@ -30,7 +44,7 @@ class App extends Component {
                         }
                         <Router history={history}>
                             <div>
-                                <PrivateRoute exact path="/" component={HomePage} />
+                                {this.showPrivateRoute(RouteList)}
                                 <Route path="/login" component={LoginPage} />
                             </div>
                         </Router>
