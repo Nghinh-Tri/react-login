@@ -1,11 +1,11 @@
-import HomePage from "./screen/HomePage/HomePage"
-import Profile from "./screen/Profile/Profile"
+import Dashboard from "./screen/dashboard/Dashboard"
+import Profile from "./screen/profile/Profile"
 
 const route = [
     {
         path: "/",
         exact: true,
-        main: () => <HomePage />
+        main: () => <Dashboard />
     },
     {
         path: "/profile",

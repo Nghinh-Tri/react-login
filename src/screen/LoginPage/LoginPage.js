@@ -1,84 +1,101 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import './login.css'
 import { connect } from 'react-redux';
+import * as Action from '../../service/action/LoginAction'
 
-// import { userActions } from '../_actions';
-import {login} from "../../service/action/LoginAction"
-
-class LoginPage extends React.Component {
+class Login extends Component {
     constructor(props) {
         super(props);
-
-        // reset login status
-        // this.props.dispatch(userActions.logout());
-
         this.state = {
-            username: '',
+            email: '',
             password: '',
             submitted: false
         };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(e) {
-        const { name, value } = e.target;
-        this.setState({ [name]: value });
-    }
+    handleChange = (e) => {
+        var { name, value } = e.target;
+        this.setState({ [name]: value })
+    };
 
-    handleSubmit(e) {
+    handleSubmit = (e) => {
         e.preventDefault();
-
         this.setState({ submitted: true });
-        const { username, password } = this.state;
-        const { dispatch } = this.props;
-        if (username && password) {
-            dispatch(login(username, password));
-        }
+        const { email, password } = this.state;
+        if (email && password) {
+            this.props.login(email, password);
+        }//ko nhan props logginIn
     }
 
     render() {
-        const { loggingIn } = this.props;
-        const { username, password, submitted } = this.state;
+        const { email, password, submitted } = this.state;
         return (
-            <div className="col-md-6 col-md-offset-3">
-                <div className="alert alert-info">
-                    Username: admin<br />
-                    Password: Abcd1234$
+            <div className="container px-4 py-5 mx-auto">
+                <div className="card card0">
+                    <div className="d-flex flex-lg-row flex-column-reverse">
+                        <div className="card card1">
+                            <div className="row justify-content-center my-auto">
+                                <div className="col-md-8 col-10 my-5">
+                                    <div className="row justify-content-center px-3 mb-3"> <img id="logo" src="https://i.imgur.com/PSXxjNY.png" /> </div>
+                                    <h3 className="mb-5 text-center heading">Hello Abcd1234$</h3>
+                                    <h6 className="msg-info">Please login to your account</h6>
+
+                                    <form onSubmit={this.handleSubmit} >
+                                        <fieldset className="form-group"> <label className="form-control-label text-muted">Username</label>
+                                            <input type="text"
+                                                id="email" name="email"
+                                                placeholder="Phone no or email id"
+                                                className="form-control"
+                                                onChange={this.handleChange}
+                                            />
+                                            {submitted && !email &&
+                                                <div className="help-block">Email is required</div>
+                                            }
+                                        </fieldset>
+                                        <fieldset className="form-group">
+                                            <label className="form-control-label text-muted">Password</label>
+                                            <input type="password"
+                                                id="password" name="password"
+                                                placeholder="Password"
+                                                className="form-control"
+                                                onChange={this.handleChange}
+                                            />
+                                            {/* block password validate have errorr */}
+                                            {submitted && !password &&
+                                                <div className="">Password is required</div>
+                                            }
+                                        </fieldset>
+                                        <div className="row justify-content-center my-3 px-3">
+                                            <button className="btn-block btn-color">Login to ESMS</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card card2">
+                            <div className="my-auto mx-md-5 px-md-5 right">
+                                <h3 className="text-white">We are more than just a company</h3> <small className="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <h2>Login</h2>
-                <form name="form" onSubmit={this.handleSubmit}>
-                    <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
-                        <label htmlFor="username">Username</label>
-                        <input type="text" className="form-control" name="username" value={username} onChange={this.handleChange} />
-                        {submitted && !username &&
-                            <div className="help-block">Username is required</div>
-                        }
-                    </div>
-                    <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
-                        <label htmlFor="password">Password</label>
-                        <input type="password" className="form-control" name="password" value={password} onChange={this.handleChange} />
-                        {submitted && !password &&
-                            <div className="help-block">Password is required</div>
-                        }
-                    </div>
-                    <div className="form-group">
-                        <button className="btn btn-primary">Login</button>
-                        {/* {loggingIn &&
-                            <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-                        } */}
-                    </div>
-                </form>
             </div>
         );
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        loggingIn: state.authentication
-    };
+
+const mapState = (state) => {
+    return { loggingIn: state.authentication };
 }
 
-export default connect(mapStateToProps, null)(LoginPage); 
+const mapDispatchToProp = dispatch => {
+    return {
+        login: (username, password) => [
+            dispatch(Action.login(username, password))
+        ]
+    }
+}
+
+
+export default connect(mapState, mapDispatchToProp)(Login);
