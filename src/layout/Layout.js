@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Navigation from '../component/navigation/Navigation';
+import NavBar from '../component/nav-bar/NavBar';
 import RouteList from '../RouterMap'
 
 class Layout extends Component {
@@ -21,6 +22,7 @@ class Layout extends Component {
             <div className="wrapper ">
                 <Navigation />
                 <div className="main-panel">
+                    <NavBar/>
                     <div className="content">
                         {this.showContent(RouteList)}
                     </div>

@@ -33,12 +33,12 @@ const route = [
         main: () => <SuggestCandidate />
     },
     {
-        path: '/project/:id',
+        path: '/project/detail/:id',
         exact: true,
         main: ({ match }) => <ProjectDetail match={match} />
     },
     {
-        path: '/project/:id/edit',
+        path: '/project/detail/:id/edit',
         exact: true,
         main: ({ match, history }) => <CreateProject match={match} history={history} />
     },

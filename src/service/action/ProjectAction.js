@@ -12,14 +12,14 @@ export const generateProject = (project) => {
 }
 
 export const createProject = (project, match) => {
-    var empID = "147c0f78-6871-41f3-b0e0-8b34842073bc";
+    var empID = JSON.parse(localStorage.getItem('EMP'))
     var url = `${API_URL}/Project/${empID}`
     console.log(match)
     return (dispatch) => {
         return axios.post(
             url,
             project,
-            { headers: { "Authorization": `Bearer ${localStorage.getItem('user').replace(/"/g, "")}` } }
+            { headers: { "Authorization": `Bearer ${JSON.parse(localStorage.getItem('token'))}` } }
         ).then(res => {
             project.projectId = res.data.resultObj
             localStorage.setItem('projectId', res.data.resultObj)
@@ -49,12 +49,12 @@ export const updateProjectDetail = (name, value) => {
 }
 
 export const fetchProject = (pageIndex) => {
-    var empID = "147c0f78-6871-41f3-b0e0-8b34842073bc";
+    var empID = JSON.parse(localStorage.getItem('EMP'))
     var url = `${API_URL}/Project/getProjects/${empID}?PageIndex=${pageIndex}&PageSize=5`
     return (dispatch) => {
         axios.get(
             url,
-            { headers: { "Authorization": `Bearer ${localStorage.getItem('user').replace(/"/g, "")}` } }
+            { headers: { "Authorization": `Bearer ${JSON.parse(localStorage.getItem('token'))}` } }
         ).then(res => {
             dispatch(fetchProjectSuccess(res.data.resultObj))
         })
@@ -71,7 +71,7 @@ export const fetchProjectSuccess = (resultObj) => {
 export const fetchProjectDetail = (projectID) => {
     var url = `${API_URL}/Project/${projectID}`
     return (dispatch) => {
-        return axios.get(url, { headers: { "Authorization": `Bearer ${localStorage.getItem('user').replace(/"/g, "")}` } }).then(res => {
+        return axios.get(url, { headers: { "Authorization": `Bearer ${JSON.parse(localStorage.getItem('token'))}` } }).then(res => {
             dispatch(fetchProjectDetailSuccess(res.data.resultObj))
         })
     }
@@ -85,10 +85,14 @@ export const fetchProjectDetailSuccess = (resultObj) => {
 }
 
 export const updateProject = (project, id) => {
+    var url = `${API_URL}/Project/${id}`
     return (dispatch) => {
-        return callAPI(`Project/${id}`, 'PUT', project).then(res => {
-            dispatch(updateProjectSuccess(res.data.resultObj))
-        })
+        return axios.put(
+            url,
+            project,
+            { headers: { "Authorization": `Bearer ${JSON.parse(localStorage.getItem('token'))}` } }).then(res => {
+                dispatch(updateProjectSuccess(res.data.resultObj))
+            })
     }
 }
 
@@ -96,5 +100,17 @@ export const updateProjectSuccess = (resultObj) => {
     return {
         type: Type.UPDATE_PROJECT,
         resultObj
+    }
+}
+
+export const changeStatusToFinish = projectID => {
+    var url = `${API_URL}/Project/changeStatus/${projectID}`
+    return dispatch => {
+        return axios.put(
+            url,
+            null,
+            { headers: { "Authorization": `Bearer ${JSON.parse(localStorage.getItem('token'))}` } }).then(res => {
+                dispatch(fetchProjectDetail(projectID))
+            })
     }
 }

@@ -7,7 +7,7 @@ export const fetchPostionList = () => {
     return (dispatch) => {
         axios.get(
             url,
-            { headers: { "Authorization": `Bearer ${localStorage.getItem('user').replace(/"/g, "")}` } }
+            { headers: { "Authorization": `Bearer ${localStorage.getItem('token').replace(/"/g, "")}` } }
         ).then(res => {
             dispatch(fetchPostionListSuccess(res.data.resultObj))
         })

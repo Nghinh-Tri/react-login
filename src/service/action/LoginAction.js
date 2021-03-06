@@ -8,9 +8,12 @@ export const login = (username, password) => {
     return dispatch => {
         dispatch(request(user))
         axios.post(`${API_URL}/User/authenticate`, user).then(res => {
-            localStorage.setItem('user', JSON.stringify(res.data.resultObj));
-            dispatch(success(JSON.stringify(res.data.resultObj)))
-            history.push('/');
+            if (res.status === 200) {
+                localStorage.setItem('EMP', JSON.stringify(res.data.resultObj.empId));
+                localStorage.setItem('token', JSON.stringify(res.data.resultObj.token));
+                dispatch(success(JSON.stringify(res.data.resultObj)))
+                history.push('/');
+            }
         })
     }
 }
@@ -37,6 +40,7 @@ export const failure = (user) => {
 }
 
 export const logout = () => {
-    localStorage.removeItem('user')
+    // localStorage.removeItem('token')
+    // localStorage.removeItem('EMP')
     return { type: Type.LOGOUT };
 }

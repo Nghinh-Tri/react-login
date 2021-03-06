@@ -13,6 +13,10 @@ export const callAPI = (endpoint, method = 'GET', body) => {
 export const showStatus = status => {
     switch (status) {
         case 0:
+            return "Pending "
+        case 1:
+            return "On Going"
+        case 2:
             return "Finish"
         default:
             break;
@@ -22,6 +26,10 @@ export const showStatus = status => {
 export const showSpan = status => {
     switch (status) {
         case 0:
+            return "badge-secondary"
+        case 1:
+            return "badge-primary"
+        case 2:
             return "badge-success"
         default:
             break;
@@ -52,6 +60,14 @@ export const convertCertificationList = (list) => {
     var result = []
     list.forEach(element => {
         result.push({ label: element.certificationName, value: element.certificationID })
+    });
+    return result;
+}
+
+export const convertLanguageList = (list) => {
+    var result = []
+    list.forEach(element => {
+        result.push({ label: element.langName, value: element.langID })
     });
     return result;
 }

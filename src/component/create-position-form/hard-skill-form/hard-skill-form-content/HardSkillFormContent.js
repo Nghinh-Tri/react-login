@@ -15,13 +15,8 @@ class HardSkillFormContent extends Component {
     }
 
     componentDidMount = () => {
-        var { hardSkillList, certificationList } = this.props
-        // if (typeof hardSkillList === 'undefined' || hardSkillList.length === 0) {
-            this.props.fetchHardSkillList()
-        // }
-        if (typeof certificationList === 'undefined' || certificationList.length === 0) {
-            this.props.fetchCertificationList()
-        }
+        this.props.fetchHardSkillList()
+        this.props.fetchCertificationList()
     }
 
     onDeleteHardSkill = (hardSkillIndex, positionFormIndex) => {
@@ -34,7 +29,7 @@ class HardSkillFormContent extends Component {
         var certificationListConverted = convertCertificationList(certificationList)
         return (
             <div className="row">
-                
+
                 {/* Skill */}
                 <div className="col mt-15-ml-30">
                     <label className="bmd-label">

@@ -7,10 +7,7 @@ import { convertSkillList } from "../../../../service/util/util";
 class SoftSkillFormContent extends Component {
 
     componentDidMount = () => {
-        var { softSkillList } = this.props
-        if (typeof softSkillList === 'undefined' || softSkillList.length === 0) {
-            this.props.fetchSoftSkillList()
-        }
+        this.props.fetchSoftSkillList()
     }
 
     onDeleteSoftSkill = (softSkillIndex, positionFormIndex) => {
@@ -18,7 +15,7 @@ class SoftSkillFormContent extends Component {
     }
 
     render() {
-        var { item, softSkillIndex, positionFormIndex, softSkillList } = this.props        
+        var { item, softSkillIndex, positionFormIndex, softSkillList } = this.props
         var listConverted = convertSkillList(softSkillList)
         return (
             <div className="row">

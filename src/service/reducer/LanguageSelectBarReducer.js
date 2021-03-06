@@ -2,15 +2,15 @@ import { Type } from "../constant/index";
 
 var initState = []
 
-const certificationSelectBarReducer = (state = initState, action) => {
+const languageSelectBarReducer = (state = initState, action) => {
     switch (action.type) {
-        case Type.FETCH_CERTIFICATION_LIST:
+        case Type.FETCH_LANGUAGE_LIST:
             if (state.length === 0)
-                state = action.certiList.slice()
+                state = action.language.slice()
             return [...state];
         default:
             return [...state];
     }
 }
 
-export default certificationSelectBarReducer;
+export default languageSelectBarReducer;

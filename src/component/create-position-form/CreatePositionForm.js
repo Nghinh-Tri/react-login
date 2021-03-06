@@ -63,12 +63,12 @@ class CreatePositionForm extends Component {
             else
                 return (
                     <React.Fragment>
-                        {/* <LanguageForm language={item.language}
+                        <LanguageForm language={item.language}
                             positionFormIndex={positionFormIndex}
                             onAddLanguage={this.props.onAddLanguage}
                             onDeleteLanguage={this.props.onDeleteLanguage}
                             onUpdateLanguageID={this.props.onUpdateLanguageID}
-                        /> */}
+                        />
                         <SoftSkillForm softSkill={item.softSkillIDs}
                             positionFormIndex={positionFormIndex}
                             onAddSoftSkill={this.props.onAddSoftSkill}

@@ -127,12 +127,12 @@ export const updateHardSkillCerti = (value, hardSkillIndex, positionFormIndex) =
 export const createPosition = (positionItem) => {
     var projectID = localStorage.getItem("projectId")
     var position = { requiredPositions: positionItem }
-    var url = `${API_URL}/Position/${projectID}`
+    var url = `${API_URL}/Project/addRequirements/${projectID}`
     return (dispatch) => {
         axios.post(
             url,
             position,
-            { headers: { "Authorization": `Bearer ${localStorage.getItem('user').replace(/"/g, "")}` } }
+            { headers: { "Authorization": `Bearer ${localStorage.getItem('token').replace(/"/g, "")}` } }
         ).then(res => {
             dispatch(createPositionSuccess(res.data.isSuccessed))
             history.push("/project/suggest-candidate")

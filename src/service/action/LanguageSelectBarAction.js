@@ -2,12 +2,12 @@ import { Type } from "../constant/index"
 import axios from "axios";
 import { API_URL } from "../util/util";
 
-export const fetchHardSkill = () => {
-    var url = `${API_URL}/Language`
+export const fetchLanguage = () => {
+    var url = `${API_URL}/Language/getLanguages`
     return (dispatch) => {
         axios.get(
             url,
-            { headers: { "Authorization": `Bearer ${localStorage.getItem('user').replace(/"/g, "")}` } }
+            { headers: { "Authorization": `Bearer ${localStorage.getItem('token').replace(/"/g, "")}` } }
         ).then(res => {
             dispatch(fetchLanguageSuccess(res.data.resultObj))
         })

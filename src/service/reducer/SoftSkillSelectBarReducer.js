@@ -5,7 +5,9 @@ var initState = []
 const softSkillSelectBarReducer = (state = initState, action) => {
     switch (action.type) {
         case Type.FETCH_SOFT_SKILL_LIST:
-            return action.softSkillList;
+            if (state.length === 0)
+                state = action.softSkillList.slice()
+            return [...state];
         default:
             return [...state];
     }

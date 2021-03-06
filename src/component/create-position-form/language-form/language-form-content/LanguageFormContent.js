@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SelectSearch from '../../select-search/SelectSearch';
-import * as Action from "../../../../service/action/SoftSkillSelectBarAction";
-import { convertSkillList } from "../../../../service/util/util";
+import * as Action from "../../../../service/action/LanguageSelectBarAction";
+import { convertLanguageList } from "../../../../service/util/util";
 
 class LanguageFormContent extends Component {
 
     componentDidMount = () => {
-        var { softSkillList } = this.props
-        if (typeof softSkillList === 'undefined' || softSkillList.length === 0) {
-            this.props.fetchSoftSkillList()
-        }
+        this.props.fetchLanguage()
     }
 
     onDeleteLanguage = (languageIndex, positionFormIndex) => {
@@ -18,8 +15,8 @@ class LanguageFormContent extends Component {
     }
 
     render() {
-        var { item, languageIndex, positionFormIndex, softSkillList } = this.props
-        var listConverted = convertSkillList(softSkillList)
+        var { item, languageIndex, positionFormIndex, language } = this.props
+        var listConverted = convertLanguageList(language)
         return (
             <div className="row">
                 <div className="col-1 mt-15-ml-30">
@@ -46,14 +43,14 @@ class LanguageFormContent extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        softSkillList: state.SoftSkillSelectBarReducer
+        language: state.LanguageSelectBarReducer
     }
 }
 
 const mapDispatchToProp = (dispatch, props) => {
     return {
-        fetchSoftSkillList: () => {
-            dispatch(Action.fetchSoftSkill())
+        fetchLanguage: () => {
+            dispatch(Action.fetchLanguage())
         }
     }
 }

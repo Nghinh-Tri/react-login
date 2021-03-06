@@ -13,7 +13,7 @@ class CreatePosition extends Component {
             requiredPositions: {
                 posID: "",
                 numberOfCandidates: 0,
-                // language: [],
+                language: [],
                 softSkillIDs: [],
                 hardSkills: []
             }

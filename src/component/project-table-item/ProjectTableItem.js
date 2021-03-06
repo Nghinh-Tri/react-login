@@ -15,7 +15,7 @@ class ProjectTableItem extends Component {
                     </span>
                 </th>
                 <th className="text-center">
-                    <NavLink to={`/project/${project.projectID}`}>
+                    <NavLink to={`/project/detail/${project.projectID}`}>
                         Detail
                     </NavLink>
                 </th>

@@ -15,7 +15,6 @@ class App extends Component {
         var result = null
         if (RouteList.length > 0) {
             result = RouteList.map((route, index) => {
-                console.log(index)
                 return (
                     <PrivateRoute key={index} exact path={route.path} component={Layout} />
                 )
