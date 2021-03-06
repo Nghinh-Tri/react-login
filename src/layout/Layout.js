@@ -10,7 +10,7 @@ class Layout extends Component {
         if (RouteList.length > 0) {
             result = RouteList.map((route, index) => {
                 return (
-                    <Route key={index} path={route.path} exact={route.exact} component={route.main} />
+                    <Route key={index} path={route.path} exact={route.exact} render={route.main} />
                 )
             });
         }
@@ -19,7 +19,6 @@ class Layout extends Component {
     render() {
         return (
             <div className="wrapper ">
-                {/* {this.renderLogin()} */}
                 <Navigation />
                 <div className="main-panel">
                     <div className="content">

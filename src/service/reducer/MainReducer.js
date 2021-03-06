@@ -1,10 +1,22 @@
 import { combineReducers } from "redux";
-import alertReducer from "./AlertReducer";
 import authentication from "./AuthenticateReducer";
+import ProjectFetchReducer from "./ProjectFetchReducer";
+import ProjectFormReducer from "./ProjectFormReducer";
+import PositionFormReducer from "./PositionFormReducer";
+import CertificationSelectBarReducer from "./CertificationSelectBarReducer";
+import HardSkillSelectBarReducer from "./HardSkillSelectBarReducer";
+import SoftSkillSelectBarReducer from "./SoftSkillSelectBarReducer";
+import PositionSelectBarReducer from "./PositionSelectBarReducer";
 
 const MainReducer = combineReducers({
-    alertReducer,
-    authentication
+    authentication,
+    ProjectFetchReducer,
+    ProjectFormReducer,
+    PositionFormReducer,
+    CertificationSelectBarReducer,
+    HardSkillSelectBarReducer,
+    SoftSkillSelectBarReducer,
+    PositionSelectBarReducer
 })
 
 export default MainReducer

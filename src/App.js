@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import LoginPage from './screen/LoginPage/LoginPage';
 import { history } from './service/helper/History';
 import { Route, Router } from 'react-router-dom';
-import { PrivateRoute } from './component/PrivateRouter';
+import { PrivateRoute } from './service/PrivateRouter';
 import Layout from './layout/Layout';
 import RouteList from './RouterMap'
 
@@ -15,6 +15,7 @@ class App extends Component {
         var result = null
         if (RouteList.length > 0) {
             result = RouteList.map((route, index) => {
+                console.log(index)
                 return (
                     <PrivateRoute key={index} exact path={route.path} component={Layout} />
                 )
