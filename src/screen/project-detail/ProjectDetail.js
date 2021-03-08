@@ -12,21 +12,25 @@ class ProjectDetail extends Component {
         this.props.fetchProjectDetail(match.params.id)
     }
 
-    componentDidUpdate = () => {
-        var { match } = this.props
-        this.props.fetchProjectDetail(match.params.id)
-    }
-
     onChangeStatusToFinish = () => {
         var { match } = this.props
         this.props.changeStatusToFinish(match.params.id)
     }
 
     setFinishButton = (status) => {
-        console.log(status)
         if (status === 1)
             return (<div className="">
                 <button className="btn btn-primary" onClick={this.onChangeStatusToFinish}> Finish</button>
+            </div>)
+        return null;
+    }
+
+    setUpdateButton = (project) => {
+        if (project.status === 1)
+            return (<div className="col">
+                <NavLink to={`/project/detail/${project.projectID}/edit`}>
+                    <button type="button" className="btn btn-primary pull-right">Update</button>
+                </NavLink>
             </div>)
         return null;
     }
@@ -109,11 +113,7 @@ class ProjectDetail extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col">
-                                    <NavLink to={`/project/detail/${project.projectID}/edit`}>
-                                        <button type="button" className="btn btn-primary pull-right">Update</button>
-                                    </NavLink>
-                                </div>
+                                {this.setUpdateButton(project)}
                             </div>
 
                             {/* Position candiate */}

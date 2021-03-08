@@ -67,13 +67,7 @@ class CreateProject extends Component {
             dateBegin: dateBegin,
             dateEstimatedEnd: dateEndEst
         }
-        this.props.createProject(project, this.props.match)
-        // if (typeof this.props.match === 'undefined') {
-        //     // this.props.history.push("/project/create-position")
-        // }
-        // else {
-        //     this.props.history.push(`/project/${id}`)
-        // }
+        this.props.createProject(project, this.props.match)        
     }
 
     render() {
