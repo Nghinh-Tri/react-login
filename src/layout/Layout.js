@@ -25,8 +25,7 @@ class Layout extends Component {
                 <div className="main-panel">
                     <NavBar/>
                     <div className="content">
-                        {/* {this.showContent(RouteList)} */}
-                        <SuggestCandidate/>
+                        {this.showContent(RouteList)}
                     </div>
                 </div>
             </div>

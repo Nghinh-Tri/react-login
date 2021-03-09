@@ -5,6 +5,7 @@ import ProjectDetail from "./screen/project-detail/ProjectDetail"
 import CreateProject from "./screen/create-project/CreateProject"
 import CreatePosition from "./screen/create-position/CreatePosition"
 import SuggestCandidate from "./screen/suggest-candidate/SuggestCandidate"
+import ConfirmSelectCandidate from "./screen/confirm-select-candidate/ConfirmSelectCandidate"
 
 const route = [
     {
@@ -31,6 +32,11 @@ const route = [
         path: '/project/suggest-candidate',
         exact: true,
         main: () => <SuggestCandidate />
+    },
+    {
+        path: '/project/confirm-select-candidates',
+        exact: true,
+        main: () => <ConfirmSelectCandidate />
     },
     {
         path: '/project/detail/:id',

@@ -3,16 +3,12 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import ProgressBar from '../../component/progress-bar/ProgressBar';
 import SuggestCandidates from '../../component/suggest-candidate/SuggestCandidates';
-import * as Action from "../../service/action/SuggestCandidate";
+import * as Action from "../../service/action/SuggestCandidateAction";
 import '../../css/SuggestNav.css'
 
 class SuggestCandidate extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            position: ['Business Analysis', 'Back-end Developer', 'Front-end Developer'],
-            active: false
-        }
     }
 
     onSelected = (index) => {
@@ -32,8 +28,24 @@ class SuggestCandidate extends Component {
         return result
     }
 
+    selectCandidate = (candidate, position) => {
+        this.props.selectCandidate(candidate, position)
+    }
+
+    unselectCandidate = (candidate, position) => {
+        this.props.unSelectCandidate(candidate, position)
+    }
+
+    getSelectedCandidateList = (suggestCandidateItem, selecedCandidateList) => {
+        for (let k = 0; k < selecedCandidateList.length; k++) {
+            if (suggestCandidateItem.position === selecedCandidateList[k].position)
+                return selecedCandidateList[k]
+        }
+        return null
+    }
+
     render() {
-        var { suggestCandidateList, selectedIndex } = this.props
+        var { suggestCandidateList, selectedIndex, candidateSelectedList } = this.props
         return (
             <div>
                 <ProgressBar step="step3" />
@@ -44,10 +56,15 @@ class SuggestCandidate extends Component {
                         </ul>
                     </div>
                     <div className='col'>
-                        <SuggestCandidates item={suggestCandidateList[selectedIndex]} />
+                        <SuggestCandidates
+                            item={suggestCandidateList[selectedIndex]}
+                            onSelectCandidate={this.selectCandidate}
+                            selectedItem={this.getSelectedCandidateList(suggestCandidateList[selectedIndex], candidateSelectedList)}
+                            onUnselectCandidate={this.unselectCandidate}
+                        />
                     </div>
                 </div>
-                <NavLink to="/project">
+                <NavLink to="/project/confirm-select-candidates">
                     <button type="submit" className="btn btn-primary pull-right pt">Next</button>
                 </NavLink>
 
@@ -59,7 +76,8 @@ class SuggestCandidate extends Component {
 const mapStateToProps = (state) => {
     return {
         suggestCandidateList: state.SuggestCandidateList,
-        selectedIndex: state.SuggestCandidateSelect
+        selectedIndex: state.SuggestCandidateSelect,
+        candidateSelectedList: state.SuggestCandidateSelectedListReducer
     }
 }
 
@@ -67,6 +85,12 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onPositionSelect: index => {
             dispatch(Action.setPositionSelect(index))
+        },
+        selectCandidate: (candidate, position) => {
+            dispatch(Action.selectCandidate(candidate, position))
+        },
+        unSelectCandidate: (candidate, position) => {
+            dispatch(Action.unselectCandiate(candidate, position))
         }
     }
 }

@@ -10,27 +10,30 @@ class SuggestCandidates extends Component {
         }
     }
 
-    onSelect = (value) => {
-        var selected = this.state.select
-        if (value)
-            selected++
-        else
-            selected--
-        this.setState({
-            select: selected
-        })
+    onSelect = (value, candidate) => {
+        if (value) {
+            this.props.onSelectCandidate(candidate, this.props.item.position)
+        }
+        else{
+            this.props.onUnselectCandidate(candidate, this.props.item.position)
+        }
     }
 
-    showCandidate = (candidateList) => {
+    showCandidate = (candidateList, selectedItem) => {
         var result = null
         result = candidateList.map((candidate, index) => {
-            return (<SuggestCandidateItems key={index} onSelect={this.onSelect} candidate={candidate} index={index} />)
+            return (<SuggestCandidateItems key={index}
+                onSelect={this.onSelect}
+                candidate={candidate}
+                index={index}
+                candidateSelectedList={selectedItem === null ? null : selectedItem.candidateSelect}
+            />)
         })
         return result
     }
 
     render() {
-        var { item } = this.props
+        var { item, selectedItem } = this.props
         return (
             <div className="card mb-80">
                 <div className="card-header card-header-primary">
@@ -39,7 +42,7 @@ class SuggestCandidates extends Component {
                             <h4 className="font-weight-bold">{item.position}</h4>
                         </div>
                         <div className="col">
-                            <h4 className="font-weight-bold pull-right">Select - {this.state.select}</h4>
+                            <h4 className="font-weight-bold pull-right">Select - {selectedItem === null ? 0: selectedItem.candidateSelect.length}</h4>
                         </div>
                     </div>
                 </div>
@@ -60,9 +63,7 @@ class SuggestCandidates extends Component {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {this.showCandidate(item.candidateList)}
-                                            {/* <SuggestCandidateItems onSelect={this.onSelect} /> */}
-                                            {/* <SuggestCandidateItems onSelect={this.onSelect} /> */}
+                                            {this.showCandidate(item.candidateList, selectedItem)}
                                         </tbody>
                                     </table>
                                 </div>

@@ -155,7 +155,7 @@
   list-style: none;
   position: relative;
   text-align: center;
-  width: calc(100% / 3);
+  width: calc(100% / 4);
 }
 
 .progressbar li:before {

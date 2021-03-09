@@ -29,9 +29,8 @@ class App extends Component {
             <React.Fragment>
                 <Router history={history}>
                     <div>
-                        {/* {this.showPrivateRoute(RouteList)}
-                        <Route path="/login" component={LoginPage} /> */}
-                        <Layout/>
+                        {this.showPrivateRoute(RouteList)}
+                        <Route path="/login" component={LoginPage} />
                     </div>
                 </Router>
             </React.Fragment>

@@ -10,6 +10,7 @@ import PositionSelectBarReducer from "./PositionSelectBarReducer";
 import LanguageSelectBarReducer from "./LanguageSelectBarReducer";
 import SuggestCandidateList from "./SuggestCandidateList";
 import SuggestCandidateSelect from "./SuggestCandidateSelect"
+import SuggestCandidateSelectedListReducer from "./SuggestCandidateSelectedListReducer";
 
 const MainReducer = combineReducers({
     authentication,
@@ -22,7 +23,8 @@ const MainReducer = combineReducers({
     PositionSelectBarReducer,
     LanguageSelectBarReducer,
     SuggestCandidateList,
-    SuggestCandidateSelect
+    SuggestCandidateSelect,
+    SuggestCandidateSelectedListReducer
 })
 
 export default MainReducer
