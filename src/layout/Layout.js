@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Navigation from '../component/navigation/Navigation';
 import NavBar from '../component/nav-bar/NavBar';
 import RouteList from '../RouterMap'
+import SuggestCandidate from '../screen/suggest-candidate/SuggestCandidate';
 
 class Layout extends Component {
 
@@ -24,7 +25,8 @@ class Layout extends Component {
                 <div className="main-panel">
                     <NavBar/>
                     <div className="content">
-                        {this.showContent(RouteList)}
+                        {/* {this.showContent(RouteList)} */}
+                        <SuggestCandidate/>
                     </div>
                 </div>
             </div>

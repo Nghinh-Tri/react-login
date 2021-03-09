@@ -7,13 +7,15 @@ class SuggestCandidateItems extends Component {
     }
 
     render() {
+        var { index, candidate } = this.props
         return (
             <tr>
-                <th className="text-center">1</th>
-                <th className="text-center">ID</th>
-                <th className="text-center">Name</th>
-                <th className="text-center">Skill</th>
-                <th className="text-center">90 %</th>
+                <th className="text-center">{index}</th>
+                <th className="text-center">{candidate.name}</th>
+                <th className="text-center">{candidate.matchLang} / 10</th>
+                <th className="text-center">{candidate.matchSoftSkill} / 10</th>
+                <th className="text-center">{candidate.matchHardSkill} /10 </th>
+                <th className="text-center">{candidate.match} / 100</th>
                 <th className="text-center">
                     <input type="checkbox" onClick={this.onSelect} />
                 </th>

@@ -91,9 +91,9 @@ const mapState = (state) => {
 
 const mapDispatchToProp = dispatch => {
     return {
-        login: (username, password) => [
+        login: (username, password) => {
             dispatch(Action.login(username, password))
-        ]
+        }
     }
 }
 

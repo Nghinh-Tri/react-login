@@ -8,6 +8,8 @@ import HardSkillSelectBarReducer from "./HardSkillSelectBarReducer";
 import SoftSkillSelectBarReducer from "./SoftSkillSelectBarReducer";
 import PositionSelectBarReducer from "./PositionSelectBarReducer";
 import LanguageSelectBarReducer from "./LanguageSelectBarReducer";
+import SuggestCandidateList from "./SuggestCandidateList";
+import SuggestCandidateSelect from "./SuggestCandidateSelect"
 
 const MainReducer = combineReducers({
     authentication,
@@ -18,7 +20,9 @@ const MainReducer = combineReducers({
     HardSkillSelectBarReducer,
     SoftSkillSelectBarReducer,
     PositionSelectBarReducer,
-    LanguageSelectBarReducer
+    LanguageSelectBarReducer,
+    SuggestCandidateList,
+    SuggestCandidateSelect
 })
 
 export default MainReducer

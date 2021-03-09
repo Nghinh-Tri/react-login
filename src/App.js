@@ -8,6 +8,7 @@ import { Route, Router } from 'react-router-dom';
 import { PrivateRoute } from './service/PrivateRouter';
 import Layout from './layout/Layout';
 import RouteList from './RouterMap'
+import SuggestCandidate from './screen/suggest-candidate/SuggestCandidate';
 
 class App extends Component {
 
@@ -28,8 +29,9 @@ class App extends Component {
             <React.Fragment>
                 <Router history={history}>
                     <div>
-                        {this.showPrivateRoute(RouteList)}
-                        <Route path="/login" component={LoginPage} />
+                        {/* {this.showPrivateRoute(RouteList)}
+                        <Route path="/login" component={LoginPage} /> */}
+                        <Layout/>
                     </div>
                 </Router>
             </React.Fragment>
